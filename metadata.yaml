@@ -2,32 +2,32 @@
     title: OpenSearch Application Variables
     vars:
       - var:
-          name: OpenSearch Username
+          name: OPENSEARCH_USERNAME
           placeholder: "admin"
           sensitive: false
       - var:
-          name: OpenSearch Password
+          name: OPENSEARCH_PASSWORD
           sensitive: true
           placeholder: "password"
 - var_group:
     title: Redis Variables
     vars:
     - var:
-        name: Redis Username
+        name: REDIS_USERNAME
         placeholder: "admin"
         sensitive: false
     - var:
-        name: Redis password
+        name: REDIS_PASSWORD
         sensitive: true
         placeholder: "password"
 - var_group:
     title: MLFlow Variables
     vars:
     - var:
-        name: MLFlow Username
+        name: MLFLOW_USERNAME
         placeholder: "admin"
         sensitive: false
     - var:
-        name: MLFlow password
+        name: MLFLOW_PASSWORD
         sensitive: true
         placeholder: "password"
