@@ -2,6 +2,7 @@ from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.widgets import Label, Input, ProgressBar, Header, Button
 from textual.containers import Horizontal, VerticalScroll, Center
+from textual.validation import Length, Function, ValidationResult, Regex
 
 import yaml
 import dotenv
@@ -18,7 +19,7 @@ class EnvVarTracker():
 
 class DoneScreen(Screen):
 
-    CSS_PATH = "exit_screen.tcss"
+    CSS_PATH = "./tcss/exit_screen.tcss"
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -42,7 +43,7 @@ class DoneScreen(Screen):
 
 class SecureMeScreen(Screen):
 
-    CSS_PATH = "main_screen.tcss"
+    CSS_PATH = "./tcss/main_screen.tcss"
 
     def __init__(self,
                  variable_groups: list,
@@ -77,10 +78,51 @@ class SecureMeScreen(Screen):
             input_label = Label(var.get('name'), name=var.get('name'), classes="inputLabel")
 
             input_area = None
+
+            max_length = 25
+            min_length = 5
+            numbers = 0
+            symbols = 0
+            uppercase = 0
+            complexity = var.get('complexity')
+            if complexity:
+                max_length = complexity.get('max_length', max_length)
+                min_length = complexity.get('min_length', min_length)
+                numbers = complexity.get('numbers', numbers)
+                symbols = complexity.get('symbols', symbols)
+                uppercase = complexity.get('uppercase', uppercase)
+            
             if var.get('sensitive'):
-                input_area = Input(placeholder=var.get('placeholder'), classes="inputArea", password=True)
+                input_area = Input(placeholder=var.get('placeholder'),
+                                   classes="inputArea",
+                                   password=True,
+                                   max_length=max_length,
+                                   valid_empty=False,
+                                   validators=[
+                                        Length(min_length, max_length,
+                                              failure_description=f"{var.get('name')} must be between {min_length} and {max_length}"),
+                                        Regex(regex=("^(?:[^0-9]*[0-9]){%d}.*" %(numbers)),
+                                              failure_description=f"{var.get('name')} must have at least {numbers} numbers in it"),
+                                        Regex(regex=("^(?:[^!@#$]*[!@#$]){%d}.*" %(symbols)),
+                                              failure_description=f"{var.get('name')} must have at least {symbols} symbols in it"),
+                                        Regex(regex=("^(?:[^A-Z]*[A-Z]){%d}.*" %(uppercase)),
+                                              failure_description=f"{var.get('name')} must have at least {symbols} uppercase letters in it")
+                                   ])
             else:
-                input_area = Input(placeholder=var.get('placeholder'), classes="inputArea")
+                input_area = Input(placeholder=var.get('placeholder'),
+                                   classes="inputArea",
+                                   max_length=max_length,
+                                   valid_empty=False,
+                                   validators=[
+                                       Length(min_length, max_length,
+                                              failure_description=f"{var.get('name')} must be between {min_length} and {max_length}"),
+                                       Regex(regex=("^(?:[^0-9]*[0-9]){%d}.*" %(numbers)),
+                                              failure_description=f"{var.get('name')} must have at least {numbers} numbers in it"),
+                                       Regex(regex=("^(?:[^!@#$]*[!@#$]){%d}.*" %(symbols)),
+                                              failure_description=f"{var.get('name')} must have at least {symbols} symbols in it"),
+                                       Regex(regex=("^(?:[^A-Z]*[A-Z]){%d}.*" %(uppercase)),
+                                              failure_description=f"{var.get('name')} must have at least {uppercase} uppercase letters in it")
+                                   ])
 
             # Add to container widgets
             container_widgets.append(input_label)
@@ -120,22 +162,31 @@ class SecureMeScreen(Screen):
         app = self.app
 
         # Handle going forward
+        invalid_form = False
         if event.button.id == "nextBtn":
             for elem in self.screen_var_elements:
                 label_elem = elem['LabelElement']
-                input_elem = elem['InputElement']
+                input_elem: Input = elem['InputElement']
+
+                validation_result: ValidationResult = input_elem.validate(input_elem.value)
+                if len(validation_result.failures) > 0:
+                    invalid_form = True
+                    msg = validation_result.failures[0].validator.failure_description
+                    self.notify(msg, severity="error", timeout=3)
+                    break
 
                 env_vars_tracker: EnvVarTracker = self.app.env_vars_tracker
                 env_vars_tracker.update_vars([(label_elem.name, input_elem.value)])
 
-            # Check if done
-            if ((self.nth+1) == len(self.variable_groups)):
-                app.push_screen(DoneScreen())
+            if not invalid_form:
+                # Check if done
+                if ((self.nth+1) == len(self.variable_groups)):
+                    app.push_screen(DoneScreen())
 
-            else:
-                app.push_screen(SecureMeScreen(self.variable_groups,
-                                            self.nth + 1,
-                                            self.progress_total))
+                else:
+                    app.push_screen(SecureMeScreen(self.variable_groups,
+                                                self.nth + 1,
+                                                self.progress_total))
         # Handle going back in stack
         if event.button.id == "prevBtn":
             app.pop_screen()
