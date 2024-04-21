@@ -23,8 +23,8 @@
     - var:
         name: REDIS_USERNAME
         placeholder: "admin"
+        sensitive: false
         complexity:
-            sensitive: false
             max_length: 15
     - var:
         name: REDIS_PASSWORD

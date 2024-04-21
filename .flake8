@@ -1,0 +1,8 @@
+[flake8]
+exclude = 
+    .git,
+    __pycache__,
+    tcss,
+    metadata.yaml
+per-file-ignores = 
+    main.py: E501

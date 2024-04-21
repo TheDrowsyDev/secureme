@@ -1,0 +1,4 @@
+textual
+PyYaml
+python-dotenv
+schema
