@@ -250,10 +250,10 @@ class SecureEnvApp(App):
                                          self.progress_total))
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(
         prog="securenv",
-        description="A Simple TUI application for setting ENV vars"
+        description="Simple TUI for Defining and Constraining Environment Variables"
     )
 
     parser.add_argument("metadata_file",
@@ -288,3 +288,7 @@ if __name__ == "__main__":
     app = SecureEnvApp(variable_groups=variable_groups,
                        env_file=env_file)
     app.run()
+
+
+if __name__ == "__main__":
+    main()

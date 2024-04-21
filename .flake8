@@ -2,7 +2,8 @@
 exclude = 
     .git,
     __pycache__,
-    tcss,
-    metadata.yaml
+    securenv/tcss,
+    example_metadata.yaml
 per-file-ignores = 
-    main.py: E501
+    securenv/cli.py: E501
+    setup.py: E501
