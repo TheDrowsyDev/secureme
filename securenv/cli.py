@@ -276,7 +276,7 @@ def main():
     except Exception as e:
         print(f"Error: An unexpected error occured: {e}")
         exit(1)
-
+ 
     if variable_groups is None:  # Extra sanity check
         print("Error: No metadata loaded. Ensure the YAML file is properly formatted.")
         exit(1)
