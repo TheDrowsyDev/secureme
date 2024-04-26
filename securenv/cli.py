@@ -6,6 +6,7 @@ from textual.validation import Length, ValidationResult, Regex
 
 from schema import Schema, And, Optional
 
+from typing import List
 import yaml
 import dotenv
 import argparse
@@ -39,7 +40,7 @@ METADATA_SCHEMA = Schema(
 )
 
 
-def metadata_verification(yaml_data: list[dict]) -> bool:
+def metadata_verification(yaml_data: List[dict]) -> bool:
     """Verifies the YAML data is properly formatted"""
     return METADATA_SCHEMA.is_valid(yaml_data)
 
@@ -48,7 +49,7 @@ class EnvVarTracker():
     def __init__(self):
         self.current_vars = {}
 
-    def update_vars(self, vars: list[tuple]):
+    def update_vars(self, vars: List[tuple]):
         for var in vars:
             key, value = var
             self.current_vars[key] = value
@@ -84,7 +85,7 @@ class SecureEnvScreen(Screen):
     CSS_PATH = "./tcss/main_screen.tcss"
 
     def __init__(self,
-                 variable_groups: list,
+                 variable_groups: List,
                  nth: int,
                  progress_total: int):
 
@@ -167,7 +168,7 @@ class SecureEnvScreen(Screen):
             container_widgets.append(input_label)
             container_widgets.append(input_area)
 
-            # Add to screens var list
+            # Add to screens var List
             self.screen_var_elements.append({"LabelElement": input_label,
                                              "InputElement": input_area})
 
@@ -237,7 +238,7 @@ class SecureEnvScreen(Screen):
 
 
 class SecureEnvApp(App):
-    def __init__(self, variable_groups: list, env_file: str):
+    def __init__(self, variable_groups: List, env_file: str):
         super().__init__()
         self.variable_groups = variable_groups
         self.progress_total = len(variable_groups)
