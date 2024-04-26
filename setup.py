@@ -23,7 +23,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12"
     ],
-    python_requires=">=3.10,<=3.12",
+    python_requires=">=3.10",
     install_requires=[
         "textual",
         "PyYaml",
