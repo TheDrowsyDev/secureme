@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test_python_3.10:
+  test_python_3_10:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
     - name: Execute tests
       run: |
         /bin/bash run_tests.sh
-  test_python_3.11:
+  test_python_3_11:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
     - name: Execute tests
       run: |
         /bin/bash run_tests.sh
-  test_python_3.12:
+  test_python_3_12:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
