@@ -1,6 +1,12 @@
 # Securenv
 
-![Securenv](assets/logo-transparent.png)
+<p align="center">
+  <picture>
+    <img alt="Securenv" src="https://github.com/TheDrowsyDev/securenv/blob/main/assets/logo-transparent.png" width="256" height="118" style="max-width: 100%;">
+  </picture>
+  <br/>
+  <br/>
+</p>
 
 </br>
 </br>
