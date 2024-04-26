@@ -11,7 +11,7 @@ setuptools.setup(
     author="DrowsyDev",
     license="Apache-2.0",
     project_urls={
-        "Documentation": "pyreadthedocs",
+        "Documentation": "https://github.com/TheDrowsyDev/securenv/blob/main/README.md",
         "Source": "https://github.com/TheDrowsyDev/securenv"
     },
     classifiers=[
