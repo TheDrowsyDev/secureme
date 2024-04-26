@@ -3,6 +3,7 @@ from subprocess import PIPE, STDOUT
 import sys
 import yaml
 import os
+from typing import List, Tuple
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 from securenv.cli import SecureEnvApp
@@ -15,13 +16,13 @@ the test suite.
 '''
 
 
-def call_securenv(*args) -> tuple[int, bytes]:
+def call_securenv(*args) -> Tuple[int, bytes]:
     cmd = ["securenv", *args]
     result = subprocess.run(cmd, stdout=PIPE, stderr=STDOUT)
     return result.returncode, result.stdout
 
 
-def verify_env_file(env_file: str, variables: list[str]) -> bool:
+def verify_env_file(env_file: str, variables: List[str]) -> bool:
     found_all_vars = True
     try:
         with open(env_file, "r") as f:
@@ -35,7 +36,7 @@ def verify_env_file(env_file: str, variables: list[str]) -> bool:
     return found_all_vars
 
 
-def create_test_app(env_file: str) -> tuple[SecureEnvApp, dict]:
+def create_test_app(env_file: str) -> Tuple[SecureEnvApp, dict]:
     variable_groups = None
     metadata_file = f"{dir_path}/data/test_valid_metadata.yaml"
     try:

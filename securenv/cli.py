@@ -6,7 +6,7 @@ from textual.validation import Length, ValidationResult, Regex
 
 from schema import Schema, And, Optional
 
-from typing import List
+from typing import List, Tuple
 import yaml
 import dotenv
 import argparse
@@ -49,7 +49,7 @@ class EnvVarTracker():
     def __init__(self):
         self.current_vars = {}
 
-    def update_vars(self, vars: List[tuple]):
+    def update_vars(self, vars: List[Tuple]):
         for var in vars:
             key, value = var
             self.current_vars[key] = value
