@@ -7,3 +7,5 @@ exclude =
 per-file-ignores = 
     securenv/cli.py: E501
     setup.py: E501
+    tests/common.py: E402
+    tests/test_02_app.py: E402, E501

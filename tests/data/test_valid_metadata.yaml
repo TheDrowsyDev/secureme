@@ -1,0 +1,35 @@
+- var_group:
+    title: OpenSearch Application Variables
+    vars:
+      - var:
+          name: OPENSEARCH_USERNAME
+          placeholder: "admin"
+          sensitive: false
+          complexity:
+            max_length: 15
+      - var:
+          name: OPENSEARCH_PASSWORD
+          sensitive: true
+          placeholder: "password"
+          complexity:
+            max_length: 20
+            min_length: 10
+            numbers: 3
+            symbols: 1
+            uppercase: 1
+- var_group:
+    title: Redis Variables
+    vars:
+    - var:
+        name: REDIS_USERNAME
+        placeholder: "admin"
+        sensitive: false
+        complexity:
+            max_length: 15
+    - var:
+        name: REDIS_PASSWORD
+        sensitive: true
+        placeholder: "password"
+        complexity:
+            max_length: 20
+            min_length: 10
