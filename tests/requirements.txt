@@ -3,5 +3,4 @@ textual
 PyYaml
 python-dotenv
 schema
-securenv
 pytest-asyncio
