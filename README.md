@@ -1,13 +1,13 @@
 # Securenv
 
-![Securenv](assets/logo-transparent.png)
+![SecurEnv](https://github.com/TheDrowsyDev/securenv/raw/main/assets/logo-transparent.png?raw=true)
 
 </br>
 </br>
 
 ---
 
-[![Linting](https://github.com/TheDrowsyDev/securenv/actions/workflows/linting.yaml/badge.svg)](https://github.com/TheDrowsyDev/securenv/actions/workflows/linting.yaml)
+[![Linting](https://github.com/TheDrowsyDev/securenv/actions/workflows/linting.yaml/badge.svg)](https://github.com/TheDrowsyDev/securenv/actions/workflows/linting.yaml) 
 [![Tests](https://github.com/TheDrowsyDev/securenv/actions/workflows/test_suite.yaml/badge.svg)](https://github.com/TheDrowsyDev/securenv/actions/workflows/test_suite.yaml)
 
 ### Overview
