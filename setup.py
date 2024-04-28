@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="securenv",
-    version="0.0.3",
+    version="0.0.5",
     description="Simple TUI for Defining and Constraining Environment Variables",
     long_description=pathlib.Path("README.md").read_text(),
     long_description_content_type="text/markdown",

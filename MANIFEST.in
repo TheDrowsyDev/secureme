@@ -1,5 +1,5 @@
 graft secureenv
+graft securenv/tcss
 include pyproject.toml
 include setup.py
-include secureenv/tcss
 global-exclude *.py[cod]
